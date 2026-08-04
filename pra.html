@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Solasilicon Navbar</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:
+            linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+            url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1800&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+
+            width:100%;
+
+            padding:16px 60px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            z-index:1000;
+
+            background:rgba(0,0,0,0.25);
+
+            backdrop-filter:blur(12px);
+
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ================= LOGO ================= */
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            color:white;
+        }
+
+        .logo-icon{
+
+            width:50px;
+            height:50px;
+
+            border-radius:14px;
+
+            background:linear-gradient(135deg,#ff9800,#ff5722);
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:20px;
+            font-weight:700;
+
+            box-shadow:0 8px 20px rgba(255,152,0,0.3);
+        }
+
+        .logo-text{
+            font-size:26px;
+            font-weight:700;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        .nav-links{
+
+            display:flex;
+            align-items:center;
+
+            gap:30px;
+
+            list-style:none;
+        }
+
+        .nav-links li{
+            position:relative;
+        }
+
+        .nav-links li a{
+
+            text-decoration:none;
+
+            color:white;
+
+            font-size:16px;
+            font-weight:500;
+
+            transition:0.3s;
+
+            position:relative;
+        }
+
+        /* HOVER LINE */
+
+        .nav-links li a::before{
+
+            content:'';
+
+            position:absolute;
+
+            left:0;
+            bottom:-8px;
+
+            width:0%;
+            height:2px;
+
+            background:#ff9800;
+
+            transition:0.4s;
+        }
+
+        .nav-links li a:hover::before{
+            width:100%;
+        }
+
+        .nav-links li a:hover{
+            color:#ff9800;
+        }
+
+        /* DROPDOWN ARROW */
+
+        .dropdown > a::after{
+            content:" ▼";
+            font-size:10px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .nav-btn{
+
+            padding:14px 24px;
+
+            border-radius:12px;
+
+            text-decoration:none;
+
+            color:white;
+
+            font-size:15px;
+            font-weight:600;
+
+            background:linear-gradient(135deg,#ff9800,#ff5722);
+
+            transition:0.4s;
+
+            box-shadow:0 10px 25px rgba(255,87,34,0.3);
+        }
+
+        .nav-btn:hover{
+            transform:translateY(-4px);
+        }
+
+        /* ================= MEGA MENU ================= */
+
+        .mega-menu{
+
+            position:absolute;
+
+            top:78px;
+            left:50%;
+
+            transform:translateX(-50%) translateY(20px);
+
+            width:1050px;
+
+            background:white;
+
+            border-radius:20px;
+
+            padding:26px;
+
+            display:flex;
+            gap:24px;
+
+            opacity:0;
+            visibility:hidden;
+
+            transition:0.4s ease;
+
+            box-shadow:
+            0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        /* SHOW MENU */
+
+        .dropdown:hover .mega-menu{
+
+            opacity:1;
+            visibility:visible;
+
+            transform:translateX(-50%) translateY(0);
+        }
+
+        /* ================= LEFT SIDE ================= */
+
+        .menu-left{
+            flex:3;
+        }
+
+        /* GRID */
+
+        .dropdown-grid{
+
+            display:grid;
+
+            grid-template-columns:repeat(2,1fr);
+
+            gap:18px;
+        }
+
+        /* CATEGORY CARD */
+
+        .category{
+
+            background:#fff;
+
+            border:1px solid #eee;
+
+            border-radius:16px;
+
+            padding:18px;
+
+            transition:0.4s;
+        }
+
+        .category:hover{
+
+            transform:translateY(-5px);
+
+            box-shadow:
+            0 10px 25px rgba(0,0,0,0.07);
+        }
+
+        /* TITLE */
+
+        .menu-title{
+
+            font-size:18px;
+            font-weight:700;
+
+            margin-bottom:16px;
+
+            color:#111;
+
+            border-bottom:1px solid #eee;
+
+            padding-bottom:12px;
+        }
+
+        /* LINKS */
+
+        .dropdown-item a{
+
+            display:block;
+
+            color:#333 !important;
+
+            margin-bottom:10px;
+
+            font-size:15px;
+            font-weight:500;
+
+            padding:8px 10px;
+
+            border-radius:10px;
+
+            transition:0.3s;
+        }
+
+        .dropdown-item a:hover{
+
+            background:#fff5eb;
+
+            color:#ff6b00 !important;
+
+            transform:translateX(5px);
+        }
+
+        /* ================= RIGHT CARD ================= */
+
+        .menu-card{
+
+            width:250px;
+
+            border-radius:20px;
+
+            background:
+            linear-gradient(135deg,#111,#222);
+
+            color:white;
+
+            padding:25px;
+
+            position:relative;
+            overflow:hidden;
+        }
+
+        .menu-card::before{
+
+            content:'';
+
+            position:absolute;
+
+            width:180px;
+            height:180px;
+
+            border-radius:50%;
+
+            background:rgba(255,255,255,0.05);
+
+            top:-50px;
+            right:-50px;
+        }
+
+        .menu-card .star{
+
+            font-size:55px;
+
+            color:#ff9800;
+
+            margin-bottom:16px;
+        }
+
+        .menu-card h2{
+
+            font-size:28px;
+
+            line-height:1.2;
+
+            margin-bottom:16px;
+        }
+
+        .menu-card p{
+
+            font-size:15px;
+
+            line-height:1.7;
+
+            color:#ddd;
+
+            margin-bottom:24px;
+        }
+
+        .menu-card button{
+
+            border:none;
+
+            padding:14px 22px;
+
+            border-radius:10px;
+
+            background:
+            linear-gradient(135deg,#ff9800,#ff5722);
+
+            color:white;
+
+            font-size:14px;
+            font-weight:600;
+
+            cursor:pointer;
+
+            transition:0.4s;
+        }
+
+        .menu-card button:hover{
+            transform:scale(1.05);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero{
+
+            height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            text-align:center;
+
+            color:white;
+
+            padding:0 20px;
+        }
+
+        .hero-content h1{
+
+            font-size:72px;
+
+            line-height:1.1;
+
+            margin-bottom:22px;
+
+            font-weight:800;
+        }
+
+        .hero-content p{
+
+            font-size:20px;
+
+            line-height:1.8;
+
+            max-width:850px;
+
+            margin:auto;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:1200px){
+
+            .mega-menu{
+                width:95%;
+            }
+
+            .dropdown-grid{
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media(max-width:992px){
+
+            .navbar{
+
+                flex-direction:column;
+
+                gap:20px;
+
+                padding:20px;
+            }
+
+            .nav-links{
+
+                flex-wrap:wrap;
+
+                justify-content:center;
+            }
+
+            .mega-menu{
+
+                position:static;
+
+                transform:none;
+
+                width:100%;
+
+                flex-direction:column;
+
+                margin-top:20px;
+            }
+
+            .menu-card{
+                width:100%;
+            }
+
+            .hero-content h1{
+                font-size:52px;
+            }
+
+            .hero-content p{
+                font-size:18px;
+            }
+        }
+
+        @media(max-width:600px){
+
+            .hero-content h1{
+                font-size:36px;
+            }
+
+            .hero-content p{
+                font-size:16px;
+            }
+
+            .logo-text{
+                font-size:22px;
+            }
+
+            .nav-btn{
+                padding:12px 18px;
+                font-size:14px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                SS
+            </div>
+
+            <div class="logo-text">
+                Solasilicon
+            </div>
+
+        </div>
+
+        <!-- NAV LINKS -->
+
+        <ul class="nav-links">
+
+            <!-- AI FOR YOUR BUSINESS -->
+
+            <li class="dropdown">
+
+                <a href="#">
+                    AI for Your Business
+                </a>
+
+                <!-- DROPDOWN -->
+
+                <div class="mega-menu">
+
+                    <!-- LEFT -->
+
+                    <div class="menu-left">
+
+                        <div class="dropdown-grid">
+
+                            <!-- CATEGORY 1 -->
+
+                            <div class="category">
+
+                                <div class="menu-title">
+                                    🧠 AI Solutions
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="ai-development-services.html">
+                                        AI Development Services
+                                    </a>
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="ai-software-development.html">
+                                        AI Software Development
+                                    </a>
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="machine-learning-development.html">
+                                        Machine Learning Development
+                                    </a>
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="ai-saas-development.html">
+                                        AI SaaS Development
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <!-- CATEGORY 2 -->
+
+                            <div class="category">
+
+                                <div class="menu-title">
+                                    🚀 Startup Services
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="no-code-mvp-development.html">
+                                        No Code MVP Development
+                                    </a>
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="ai-app-consulting.html">
+                                        AI App Consulting Services
+                                    </a>
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="llm-development.html">
+                                        LLM Development
+                                    </a>
+                                </div>
+
+                                <div class="dropdown-item">
+                                    <a href="mlops-consulting.html">
+                                        MLOps Consulting Services
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT CARD -->
+
+                    <div class="menu-card">
+
+                        <div class="star">
+                            ✦
+                        </div>
+
+                        <h2>
+                            Looking to Startup a Business?
+                        </h2>
+
+                        <p>
+                            Build powerful AI products, SaaS platforms,
+                            and scalable startup solutions with Solasilicon.
+                        </p>
+
+                        <button>
+                            Lets Discuss Now!
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <!-- SERVICES -->
+
+            <li>
+                <a href="#">
+                    Services
+                </a>
+            </li>
+
+            <!-- PRODUCTS -->
+
+            <li>
+                <a href="#">
+                    Products
+                </a>
+            </li>
+
+            <!-- BLOG -->
+
+            <li>
+                <a href="#">
+                    Blog
+                </a>
+            </li>
+
+            <!-- CONTACT -->
+
+            <li>
+                <a href="#">
+                    Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- BUTTON -->
+
+        <a href="#" class="nav-btn">
+            Say Hi on WhatsApp
+        </a>
+
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Launch Your Startup <br>
+                Faster Than Ever
+            </h1>
+
+            <p>
+                We help businesses build scalable AI solutions,
+                SaaS platforms, and digital products with modern technology.
+            </p>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
